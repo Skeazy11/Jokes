@@ -77,6 +77,9 @@ main {
   height: calc(100vh - 15% - 10%);
   min-height: calc(100vh - 15% - 10%);
   padding: 0.5rem;
+}
+
+main .form-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,9 +89,10 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 100%;
 }
 
-main form {
+main .form-container form {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -107,13 +111,13 @@ main form {
   font-weight: lighter;
 }
 
-main form label {
+main .form-container form label {
   z-index: 1;
   font-size: 1.2rem;
   color: #0000004a;
 }
 
-main form input {
+main .form-container form input {
   border: none;
   border-bottom: 1px solid;
   width: 13rem;
@@ -127,12 +131,12 @@ main form input {
   transition: margin-top 100ms ease-in;
 }
 
-main form input:focus, main form input:valid {
+main .form-container form input:focus, main .form-container form input:valid {
   outline: none;
   margin-top: 0rem;
 }
 
-main form button {
+main .form-container form button {
   background-color: #7aefa6;
   border: none;
   width: 6rem;
@@ -148,12 +152,114 @@ main form button {
   transition: background-color 150ms ease-in;
 }
 
-main form button:hover {
+main .form-container form button:hover {
   background-color: #44ec83;
 }
 
-main form button:focus {
+main .form-container form button:focus {
   outline: none;
+}
+
+main .posts-container {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+main .createPost {
+  margin-bottom: 2rem;
+  -webkit-transition: margin 200ms ease-out;
+  transition: margin 200ms ease-out;
+  display: none;
+}
+
+main .createPost .createPostButton {
+  border: 1px solid black;
+  background-color: transparent;
+  height: 3rem;
+  width: 11rem;
+  font-family: inherit;
+  opacity: 1;
+  pointer-events: all;
+  -webkit-transition: opacity 300ms ease-in;
+  transition: opacity 300ms ease-in;
+}
+
+main .createPost .createPostText {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  height: 3rem;
+  width: 11rem;
+  opacity: 0;
+  pointer-events: none;
+  padding: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+  -webkit-transition: opacity 300ms ease-in, height 300ms ease-in, width 300ms ease-in;
+  transition: opacity 300ms ease-in, height 300ms ease-in, width 300ms ease-in;
+}
+
+main .createPost .postBtn {
+  position: absolute;
+  top: 25%;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 15px;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 300ms ease-in;
+  transition: opacity 300ms ease-in;
+}
+
+main .createPost .post {
+  left: 20%;
+  background-color: #6df36d;
+}
+
+main .createPost .close {
+  right: 20%;
+  background-color: #f78f8f;
+}
+
+main .createPost .showBtn {
+  opacity: 1;
+  pointer-events: all;
+}
+
+main .createPost .hideBtn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+main .createPost .showInp {
+  opacity: 1;
+  pointer-events: all;
+  height: 6rem;
+  width: 100%;
+}
+
+main .extendMargin {
+  margin-bottom: 6rem;
+}
+
+main .show {
+  display: block;
 }
 
 footer {

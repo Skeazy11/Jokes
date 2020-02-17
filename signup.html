@@ -16,18 +16,20 @@
 <body onload="load()">
     <div id="root">
         <main>
-            <form action="./php/includes/signup.inc" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" autocomplete="none" required="required">
-                <label for="email">E-mail</label>
-                <input type="text" id="email" name="email" autocomplete="off" required="required">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="off" required="required">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="off"
-                    required="required">
-                <button type="submit" name="signup-submit">Register</button>
-            </form>
+            <div class="form-container">
+                <form action="./php/includes/signup.inc" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" autocomplete="none" required="required">
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email" name="email" autocomplete="off" required="required">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="off" required="required">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="off"
+                        required="required">
+                    <button type="submit" name="signup-submit">Register</button>
+                </form>
+            </div>
         </main>
     </div>
 </body>

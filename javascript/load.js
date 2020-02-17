@@ -1,6 +1,6 @@
 const root = document.querySelector("#root");
 
-// Moved here instead to be accessible inside phpSessionStatus()
+// Moved here instead to be accessible inside sessionStatus()
 let header = document.createElement("header"),
     nav = document.createElement("nav"),
     divLogo = document.createElement("div"),
@@ -11,21 +11,12 @@ let header = document.createElement("header"),
     signOutLink = document.createElement("a");
 
 function load() {
-    phpSessionStatus();
+    sessionStatus();
     createHeader();
     createFooter();
 }
 
 function createHeader() {
-    // let header = document.createElement("header"),
-    //     nav = document.createElement("nav"),
-    //     divLogo = document.createElement("div"),
-    //     divNav = document.createElement("div"),
-    //     logoLink = document.createElement("a"),
-    //     loginLink = document.createElement("a"),
-    //     signUpLink = document.createElement("a"),
-    //     signOutLink = document.createElement("a");
-
     divLogo.classList.add("logo");
     divNav.classList.add("navigation");
     logoLink.classList.add("logo-link");
@@ -63,7 +54,7 @@ function createFooter() {
     root.appendChild(footer);
 }
 
-function phpSessionStatus() {
+function sessionStatus() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./sessionStatus", true);
 
@@ -72,6 +63,7 @@ function phpSessionStatus() {
             let data = JSON.parse(this.response);
             if (data.userLogged) {
                 divNav.appendChild(signOutLink);
+                createPostCont.classList.toggle("show");
             }
             else {
                 divNav.appendChild(loginLink);

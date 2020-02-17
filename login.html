@@ -20,13 +20,15 @@
 <body onload="load()">
     <div id="root">
         <main>
-            <form action="./php/includes/login.inc" method="POST">
-                <label for="email">E-mail</label>
-                <input type="text" id="email" name="email" autocomplete="off" required="required">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="off" required="required">
-                <button type="submit" name="login-submit">Login</button>
-            </form>
+            <div class="form-container">
+                <form action="./php/includes/login.inc" method="POST">
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email" name="email" autocomplete="off" required="required">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="off" required="required">
+                    <button type="submit" name="login-submit">Login</button>
+                </form>
+            </div>
         </main>
     </div>
 </body>
