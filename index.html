@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="./styles/index.css">
     <script defer src="./javascript/index.js"></script>
     <script defer src="./javascript/load.js"></script>
+    <script defer src="./javascript/displayPosts.js"></script>
+    <script defer src="./javascript/editPosts.js"></script>
     <noscript>
         Your browser doesn't support JavaScript or you have disabled JavaScript.
         Please enable Javascript to access the site content.
@@ -17,18 +19,16 @@
 
 </head>
 
-<body onload="load()">
+<body onload="load(); getPosts()">
     <div id="root">
         <main>
             <div class="posts-container">
                 <div class="createPost hide">
                     <button class="createPostButton">Add a new joke</button>
                     <textarea class="createPostText" style="resize: none;"></textarea>
-                    <button class="postBtn post">Post</button>
-                    <button class="postBtn close">Close</button>
+                    <button class="postBtn sendPost">Post</button>
+                    <button class="postBtn closePost">Close</button>
                 </div>
-                <div>BOMBIZANELA gtfo please, HAHAHAHAHHAHAHA!</div>
-
             </div>
         </main>
     </div>

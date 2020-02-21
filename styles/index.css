@@ -77,6 +77,7 @@ main {
   height: calc(100vh - 15% - 10%);
   min-height: calc(100vh - 15% - 10%);
   padding: 0.5rem;
+  overflow-y: auto;
 }
 
 main .form-container {
@@ -175,8 +176,81 @@ main .posts-container {
   position: relative;
 }
 
+main .posts-container .post {
+  border-bottom: 1px solid #d6d0d0;
+  border-radius: 2rem;
+  padding: 1rem 1rem;
+  margin: 1rem 0;
+  max-width: 100vw;
+  width: 90vw;
+  word-break: break-word;
+  position: relative;
+}
+
+main .posts-container .post .postEdit {
+  position: absolute;
+  top: -8px;
+  font-size: 0.8rem;
+  color: #afadad;
+}
+
+main .posts-container .post .postContent {
+  margin-bottom: 0.5rem;
+}
+
+main .posts-container .post .postUser, main .posts-container .post .postDate {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #afabab;
+  text-align: end;
+}
+
+main .posts-container .post .thumbImg, main .posts-container .post .commentImg {
+  width: 1.5rem;
+  position: absolute;
+  bottom: 15px;
+}
+
+main .posts-container .post .thumbImgRight {
+  left: 18%;
+}
+
+main .posts-container .post .thumbImgLeft {
+  left: 9%;
+}
+
+main .posts-container .post .commentImg {
+  left: 28%;
+  bottom: 14px;
+}
+
+main .posts-container .post .editText {
+  font-family: inherit;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+main .posts-container .post .pConfirm {
+  top: -8px;
+  font-size: 0.8rem;
+  color: #afadad;
+  position: absolute;
+}
+
+main .posts-container .post .pDiscard {
+  top: -8px;
+  font-size: 0.8rem;
+  color: #afadad;
+  position: absolute;
+  left: 70px;
+}
+
+main .posts-container .post .pHide {
+  display: none;
+}
+
 main .createPost {
-  margin-bottom: 2rem;
+  margin: 2rem 0 2rem 0;
   -webkit-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
   display: none;
@@ -185,13 +259,14 @@ main .createPost {
 main .createPost .createPostButton {
   border: 1px solid black;
   background-color: transparent;
+  border-radius: 2rem;
   height: 3rem;
   width: 11rem;
   font-family: inherit;
   opacity: 1;
   pointer-events: all;
-  -webkit-transition: opacity 300ms ease-in;
-  transition: opacity 300ms ease-in;
+  -webkit-transition: opacity 1000ms ease-in;
+  transition: opacity 1000ms ease-in;
 }
 
 main .createPost .createPostText {
@@ -213,10 +288,9 @@ main .createPost .createPostText {
 
 main .createPost .postBtn {
   position: absolute;
-  top: 25%;
+  top: 32%;
   width: 5rem;
   height: 2rem;
-  border-radius: 15px;
   background-color: transparent;
   border: none;
   font-family: inherit;
@@ -227,14 +301,12 @@ main .createPost .postBtn {
   transition: opacity 300ms ease-in;
 }
 
-main .createPost .post {
+main .createPost .sendPost {
   left: 20%;
-  background-color: #6df36d;
 }
 
-main .createPost .close {
+main .createPost .closePost {
   right: 20%;
-  background-color: #f78f8f;
 }
 
 main .createPost .showBtn {
@@ -251,7 +323,9 @@ main .createPost .showInp {
   opacity: 1;
   pointer-events: all;
   height: 6rem;
-  width: 100%;
+  width: 90%;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
 }
 
 main .extendMargin {

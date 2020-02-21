@@ -2,7 +2,7 @@
 
 if (isset($_POST["login-submit"])) {
 
-    include "../includes/autoloader.inc.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/Jokes/php/includes/autoloader.inc.php";
 
     $mail = $_POST['email'];
     $password = $_POST['password'];

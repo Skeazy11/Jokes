@@ -56,7 +56,7 @@ function createFooter() {
 
 function sessionStatus() {
     let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./sessionStatus", true);
+    xhttp.open("GET", "./sessionStatus", true);
 
     xhttp.onload = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {

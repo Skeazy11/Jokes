@@ -1,7 +1,7 @@
 
 <?php
 
-require_once '../classes/db.class.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/Jokes/php/classes/db.class.php';
 
 class Query extends DB {
 
@@ -13,6 +13,16 @@ class Query extends DB {
         $columns = implode(", ", array_keys($data));
 
         $sql = "INSERT INTO $tableName ($columns) VALUES ('$values');";
+        $this->conn->query($sql);
+
+        $this->closeConn();
+    }
+
+    public function updatePost(string $dbName, string $tableName, int $id, string $newContent) {
+
+        $this->connect($dbName);
+
+        $sql = "UPDATE $tableName SET post_content = '$newContent' WHERE post_id = $id;";
         $this->conn->query($sql);
 
         $this->closeConn();
@@ -56,6 +66,26 @@ class Query extends DB {
                 return true;
             }
             return false;
+        }
+        else {
+            return false;
+        }
+
+        $this->closeConn();
+    }
+
+    public function getPosts() {
+        $this->connect('jokes');
+
+        $posts = array();
+
+        $sql = "SELECT users.user_name, post_user_id, post_id, post_content, date_created FROM posts INNER JOIN users ON users.user_id = posts.post_user_id";
+        if ($result = $this->conn->query($sql)) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($posts, $row);
+            }
+            return $posts;
+
         }
         else {
             return false;

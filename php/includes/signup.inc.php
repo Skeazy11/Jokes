@@ -2,7 +2,7 @@
 
 if (isset($_POST['signup-submit'])) {
 
-    include "../includes/autoloader.inc.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/Jokes/php/includes/autoloader.inc.php";
 
     //Get the values enter in the sing-up form
     $username = $_POST['name'];
