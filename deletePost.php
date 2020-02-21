@@ -8,4 +8,4 @@ session_start();
 $json_str = file_get_contents('php://input');
 $json_obj = json_decode($json_str);
 
-$query->updatePost("jokes", "posts", (int)$json_obj->postId, $json_obj->postContent);
+$query->deletePost("jokes", "posts", (int)$json_obj->postId);

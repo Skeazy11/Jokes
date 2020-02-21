@@ -28,6 +28,16 @@ class Query extends DB {
         $this->closeConn();
     }
 
+    public function deletePost(string $dbName, string $tableName, int $id) {
+
+        $this->connect($dbName);
+
+        $sql = "DELETE FROM $tableName WHERE post_id = $id;";
+        $this->conn->query($sql);
+
+        $this->closeConn();
+    }
+
     public function loginCheck(string $dbName, string $tableName, string $mail) {
 
         $this->connect($dbName);

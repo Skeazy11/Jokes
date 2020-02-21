@@ -34,7 +34,8 @@ sendPostBtn.addEventListener("click", () => {
         createPostCont.classList.toggle("extendMargin");
     }, 200);
 
-    getPosts();
+    setTimeout(getPosts, 500);
+
 })
 
 

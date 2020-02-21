@@ -23,13 +23,17 @@ postsContainer.addEventListener("click", (e) => {
                     editArea.classList.add('editText');
                     element.style.display = "none";
                     let pConfirm = document.createElement("p"),
-                        pDiscard = document.createElement("p");
+                        pDiscard = document.createElement("p"),
+                        pDelete = document.createElement('p');
 
+                    pDelete.classList.add('postDelete');
                     pConfirm.classList.add("pConfirm");
                     pDiscard.classList.add("pDiscard");
                     pConfirm.innerText = "Confirm";
                     pDiscard.innerText = "Discard";
+                    pDelete.innerText = "Delete Post";
 
+                    element.parentNode.appendChild(pDelete);
                     element.parentNode.appendChild(pConfirm);
                     element.parentNode.appendChild(pDiscard);
 
@@ -63,6 +67,26 @@ postsContainer.addEventListener("click", (e) => {
                         editArea.parentNode.removeChild(editArea);
                         element.style.display = "block";
                         e.target.classList.toggle("pHide");
+                        editing = false;
+                    })
+
+                    pDelete.addEventListener("click", () => {
+                        let xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("POST", "./deletePost", true);
+                        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+                        let data = JSON.stringify({
+                            "postId": `${editArea.parentNode.id}`
+                        });
+
+                        xmlhttp.send(data);
+                        setTimeout(getPosts, 500);
+
+                        // editArea.parentNode.removeChild(pConfirm);
+                        // editArea.parentNode.removeChild(pDiscard);
+                        // editArea.parentNode.removeChild(editArea);
+                        // element.style.display = "block";
+                        // e.target.classList.toggle("pHide");
                         editing = false;
                     })
 
