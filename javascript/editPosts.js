@@ -1,4 +1,5 @@
 let editing = false;
+let commenting = false;
 
 postsContainer.addEventListener("click", (e) => {
     if (e.target.classList == 'postEdit') {
@@ -11,13 +12,13 @@ postsContainer.addEventListener("click", (e) => {
                 const element = childrenOfContainer[i];
                 if (element.classList.contains("postContent")) {
                     element.parentNode.insertBefore(editArea, element);
-                    editArea.style.minHeight = "30px";
-                    editArea.style.minWidth = "256px";
-                    editArea.style.maxHeight = "300px";
-                    editArea.style.maxWidth = "256px";
+                    // editArea.style.minHeight = "30px";
+                    // editArea.style.minWidth = "256px";
+                    // editArea.style.maxHeight = "300px";
+                    // editArea.style.maxWidth = "256px";
 
-                    editArea.style.height = element.offsetHeight.toString() + 30 + "px";
-                    editArea.style.width = element.offsetWidth.toString() + "px";
+                    // editArea.style.height = element.offsetHeight.toString() + 30 + "px";
+                    // editArea.style.width = element.offsetWidth.toString() + "px";
 
                     editArea.value = element.innerText;
                     editArea.classList.add('editText');
@@ -40,6 +41,7 @@ postsContainer.addEventListener("click", (e) => {
                     pDiscard.addEventListener("click", () => {
                         editArea.parentNode.removeChild(pConfirm);
                         editArea.parentNode.removeChild(pDiscard);
+                        editArea.parentNode.removeChild(pDelete);
                         editArea.parentNode.removeChild(editArea);
                         element.style.display = "block";
                         e.target.classList.toggle("pHide");
@@ -81,17 +83,80 @@ postsContainer.addEventListener("click", (e) => {
 
                         xmlhttp.send(data);
                         setTimeout(getPosts, 500);
-
-                        // editArea.parentNode.removeChild(pConfirm);
-                        // editArea.parentNode.removeChild(pDiscard);
-                        // editArea.parentNode.removeChild(editArea);
-                        // element.style.display = "block";
-                        // e.target.classList.toggle("pHide");
+                        setTimeout(getComments, 500);
                         editing = false;
+                        commenting = false;
                     })
 
                     return;
                 }
+            }
+        }
+    }
+
+    if (e.target.classList == 'commentImg') {
+        if (!commenting) {
+
+            if (userLogged) {
+                commenting = true;
+                let commentArea = document.createElement("textarea");
+                commentArea.classList.add("commentArea");
+                e.target.parentNode.appendChild(commentArea);
+
+                e.target.parentNode.style.marginBottom = "10rem";
+
+                let commentSend = document.createElement("p"),
+                    commentDiscard = document.createElement("p");
+
+                commentSend.classList.add("commentSend");
+                commentDiscard.classList.add("commentDiscard");
+
+                commentSend.classList.add("commentButtons");
+                commentDiscard.classList.add("commentButtons");
+
+                commentSend.innerText = "Send";
+                commentDiscard.innerText = "Discard";
+
+                e.target.parentNode.appendChild(commentDiscard);
+                e.target.parentNode.appendChild(commentSend);
+
+
+                commentDiscard.addEventListener("click", () => {
+                    e.target.parentNode.removeChild(commentDiscard);
+                    e.target.parentNode.removeChild(commentSend);
+                    e.target.parentNode.removeChild(commentArea);
+                    e.target.parentNode.removeAttribute("style");
+                    commenting = false;
+
+                })
+
+                commentSend.addEventListener("click", () => {
+                    if (commentArea.value !== "") {
+
+                        let xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("POST", "./sendComment", true);
+                        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+                        let data = JSON.stringify({
+                            "commentContent": `${commentArea.value}`,
+                            "postId": `${e.target.parentNode.id}`
+                        });
+                        xmlhttp.send(data);
+
+                        e.target.parentNode.removeChild(commentDiscard);
+                        e.target.parentNode.removeChild(commentSend);
+                        e.target.parentNode.removeChild(commentArea);
+                        e.target.parentNode.removeAttribute("style");
+                        commenting = false;
+                        setTimeout(getComments, 500);
+                    }
+
+
+
+                })
+            }
+            else {
+                window.location.href = "./login";
             }
         }
     }

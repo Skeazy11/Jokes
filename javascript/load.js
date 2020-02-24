@@ -1,4 +1,5 @@
 const root = document.querySelector("#root");
+let userLogged = false;
 
 // Moved here instead to be accessible inside sessionStatus()
 let header = document.createElement("header"),
@@ -64,15 +65,18 @@ function sessionStatus() {
             if (data.userLogged) {
                 divNav.appendChild(signOutLink);
                 createPostCont.classList.toggle("show");
+                userLogged = true;
             }
             else {
                 divNav.appendChild(loginLink);
                 divNav.appendChild(signUpLink);
+                userLogged = false;
             }
         }
         else {
             divNav.appendChild(loginLink);
             divNav.appendChild(signUpLink);
+            userLogged = false;
         }
     }
 

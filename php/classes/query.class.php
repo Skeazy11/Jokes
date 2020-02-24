@@ -14,7 +14,7 @@ class Query extends DB {
 
         $sql = "INSERT INTO $tableName ($columns) VALUES ('$values');";
         $this->conn->query($sql);
-
+        
         $this->closeConn();
     }
 
@@ -32,9 +32,12 @@ class Query extends DB {
 
         $this->connect($dbName);
 
-        $sql = "DELETE FROM $tableName WHERE post_id = $id;";
-        $this->conn->query($sql);
+        $sql = "DELETE posts, comments FROM posts
+                LEFT JOIN comments
+                ON posts.post_id = comments.comment_post_id
+                WHERE posts.post_id = $id;";
 
+        $this->conn->query($sql);
         $this->closeConn();
     }
 
@@ -89,7 +92,11 @@ class Query extends DB {
 
         $posts = array();
 
-        $sql = "SELECT users.user_name, post_user_id, post_id, post_content, date_created FROM posts INNER JOIN users ON users.user_id = posts.post_user_id";
+        $sql = "SELECT users.user_name, post_user_id, post_id, post_content, date_created 
+                FROM posts 
+                INNER JOIN users 
+                ON users.user_id = posts.post_user_id";
+
         if ($result = $this->conn->query($sql)) {
             while ($row = mysqli_fetch_assoc($result)) {
                 array_push($posts, $row);
@@ -102,5 +109,32 @@ class Query extends DB {
         }
 
         $this->closeConn();
+    }
+
+    public function getComments() {
+        $this->connect('jokes');
+
+        $comments = array();
+
+        $sql = "SELECT users.user_name, comment_id, 
+                        comment_user_id, comment_post_id, 
+                        comment_content, date_created
+                FROM comments
+                INNER JOIN users
+                ON users.user_id = comments.comment_user_id";
+
+        if ($result = $this->conn->query($sql)) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($comments, $row);
+            }
+            return $comments;
+
+        }
+        else {
+            return false;
+        }
+
+        $this->closeConn();
+
     }
 }

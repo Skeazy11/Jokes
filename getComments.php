@@ -1,42 +1,42 @@
 <?php
+
 header("Content-Type:application/json");
 include $_SERVER['DOCUMENT_ROOT'] . '/Jokes/php/includes/autoloader.inc.php';
 
 $query = new Query;
 
-if (!empty($_GET['name']) && $_GET['name'] == 'posts') {
-	$posts = $query->getPosts();
+if (!empty($_GET['name']) && $_GET['name'] == 'comments') {
+	$comments = $query->getComments();
 	$currentUserId = 0;
 
-	if(!empty($posts)) {
+	if(!empty($comments)) {
 		session_start();
 		if(isset($_SESSION['userId'])) {
 			$currentUserId = $_SESSION['userId'];
 		}
 
-		for ($i = 0; $i < count($posts); $i++) { 
-			if($posts[$i]['post_user_id'] == $currentUserId) {
-				$posts[$i]['post_user_id'] = 'owner';
+		for ($i = 0; $i < count($comments); $i++) { 
+			if($comments[$i]['comment_user_id'] == $currentUserId) {
+				$comments[$i]['comment_user_id'] = 'owner';
 			}
 			else {
-				$posts[$i]['post_user_id'] = 'viewer';
+				$comments[$i]['comment_user_id'] = 'viewer';
 			}
 
-			$posts[$i]['user_type'] = $posts[$i]['post_user_id'];
-			unset($posts[$i]['post_user_id']);
+			$comments[$i]['user_type'] = $comments[$i]['comment_user_id'];
+			unset($comments[$i]['comment_user_id']);
 		}
 
-	}
-
-	if(empty($posts))
+    }
+    
+    if(empty($comments))
 	{
-		response(200, "Posts Not Found", NULL);
+		response(200, "Comments Not Found", NULL);
 	}
 	else
 	{
-		response(200, "Success", $posts);
-	}
-	
+		response(200, "Success", $comments);
+    }
 }
 else {
 	response(400,"Invalid Request", NULL);

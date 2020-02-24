@@ -30,7 +30,12 @@ if (isset($_POST['signup-submit'])) {
         header('Location: ../../signup.html?error=emailinuse');        
     }
     else {
-        $query->insert("jokes", "users", array ("user_name" => $username, "user_email" => $email, "user_password" => PasswordHash::hashPassword($password)));
+        $query->insert("jokes", "users", 
+                        array (
+                            "user_name" => $username, 
+                            "user_email" => $email, 
+                            "user_password" => PasswordHash::hashPassword($password)
+                        ));
         header('Location: ../../');
         exit();
     }

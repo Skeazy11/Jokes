@@ -1,4 +1,9 @@
 /*-----VARIABLES-----*/
+:root {
+  --header-height: 15%;
+  --footer-height: 10%;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -19,7 +24,7 @@ body {
 
 header {
   width: 100%;
-  height: 15%;
+  height: var(--header-height);
   background-color: #444242;
 }
 
@@ -74,8 +79,8 @@ header nav .navigation .nav-link {
 }
 
 main {
-  height: calc(100vh - 15% - 10%);
-  min-height: calc(100vh - 15% - 10%);
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
   padding: 0.5rem;
   overflow-y: auto;
 }
@@ -173,25 +178,31 @@ main .posts-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: relative;
+}
+
+main .posts-container .postCard {
+  max-width: 90vw;
+  width: 90vw;
 }
 
 main .posts-container .post {
-  border-bottom: 1px solid #d6d0d0;
-  border-radius: 2rem;
+  -webkit-box-shadow: 0px 3px 8px -2px #ecdfdf;
+          box-shadow: 0px 3px 8px -2px #ecdfdf;
   padding: 1rem 1rem;
-  margin: 0 0 2rem 0;
-  max-width: 100vw;
-  width: 90vw;
+  margin: 1rem 0 2rem 0;
   word-break: break-word;
   position: relative;
+  -webkit-transition: margin-bottom 200ms ease;
+  transition: margin-bottom 200ms ease;
 }
 
 main .posts-container .post .postEdit {
   position: absolute;
-  top: -8px;
+  top: 0;
+  right: 10px;
   font-size: 0.8rem;
   color: #afadad;
+  cursor: pointer;
 }
 
 main .posts-container .post .postDelete {
@@ -217,6 +228,7 @@ main .posts-container .post .thumbImg, main .posts-container .post .commentImg {
   width: 1.5rem;
   position: absolute;
   bottom: 15px;
+  cursor: pointer;
 }
 
 main .posts-container .post .thumbImgRight {
@@ -228,14 +240,57 @@ main .posts-container .post .thumbImgLeft {
 }
 
 main .posts-container .post .commentImg {
-  left: 28%;
-  bottom: 14px;
+  left: 19%;
+  bottom: 13px;
+}
+
+main .posts-container .post .commentArea {
+  position: absolute;
+  bottom: -110px;
+  width: 90%;
+  height: 75%;
+  max-width: 90%;
+  max-height: 75%;
+  min-width: 90%;
+  min-height: 75%;
+  right: 0;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 5px;
+}
+
+main .posts-container .post .commentButtons {
+  position: absolute;
+  bottom: -135px;
+  right: 20px;
+  font-size: 0.8rem;
+  color: #afadad;
+  cursor: pointer;
+}
+
+main .posts-container .post .commentDiscard {
+  right: 60px;
+}
+
+main .posts-container .post .showComments, main .posts-container .post .hideComments {
+  position: absolute;
+  bottom: -25px;
+  left: 25px;
+  font-size: 0.8rem;
+  color: #afadad;
+  cursor: pointer;
+}
+
+main .posts-container .post .hideComments {
+  display: none;
 }
 
 main .posts-container .post .editText {
   font-family: inherit;
   padding: 5px;
   font-size: 1rem;
+  width: 100%;
+  height: 100%;
 }
 
 main .posts-container .post .pConfirm {
@@ -243,6 +298,7 @@ main .posts-container .post .pConfirm {
   font-size: 0.8rem;
   color: #afadad;
   position: absolute;
+  cursor: pointer;
 }
 
 main .posts-container .post .pDiscard {
@@ -251,17 +307,69 @@ main .posts-container .post .pDiscard {
   color: #afadad;
   position: absolute;
   left: 70px;
+  cursor: pointer;
 }
 
 main .posts-container .post .pHide {
   display: none;
 }
 
+main .posts-container .post .pShow {
+  display: block;
+}
+
+main .posts-container .comments {
+  margin-bottom: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: none;
+}
+
+main .posts-container .comments .commentUser, main .posts-container .comments .commentDate {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #afabab;
+  text-align: end;
+}
+
+main .posts-container .comments .commentContainer {
+  width: 80vw;
+  max-width: 80vw;
+  padding: 1rem;
+  word-wrap: break-word;
+  margin-bottom: 0.5rem;
+  -webkit-box-shadow: 0px 0px 10px 0px #f4f4f4;
+          box-shadow: 0px 0px 10px 0px #f4f4f4;
+}
+
+main .posts-container .comments .commentContent {
+  font-size: 0.85rem;
+}
+
+main .posts-container .commentsExtend {
+  margin-bottom: 15rem;
+}
+
+main .posts-container .display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 main .createPost {
-  margin: 2rem 0 2rem 0;
+  margin: 2rem 0 1rem 0;
   -webkit-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
   display: none;
+  position: relative;
 }
 
 main .createPost .createPostButton {
@@ -275,11 +383,12 @@ main .createPost .createPostButton {
   pointer-events: all;
   -webkit-transition: opacity 1000ms ease-in;
   transition: opacity 1000ms ease-in;
+  cursor: pointer;
 }
 
 main .createPost .createPostText {
   position: absolute;
-  top: 0%;
+  bottom: -70%;
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
@@ -296,7 +405,7 @@ main .createPost .createPostText {
 
 main .createPost .postBtn {
   position: absolute;
-  top: 32%;
+  top: 160%;
   width: 5rem;
   height: 2rem;
   background-color: transparent;
@@ -307,14 +416,15 @@ main .createPost .postBtn {
   pointer-events: none;
   -webkit-transition: opacity 300ms ease-in;
   transition: opacity 300ms ease-in;
+  cursor: pointer;
 }
 
 main .createPost .sendPost {
-  left: 20%;
+  left: 0;
 }
 
 main .createPost .closePost {
-  right: 20%;
+  right: 0;
 }
 
 main .createPost .showBtn {
@@ -332,13 +442,12 @@ main .createPost .showInp {
   opacity: 1;
   pointer-events: all;
   height: 6rem;
-  width: 90%;
-  border-radius: 0.5rem;
+  width: 90vw;
   margin: 1rem 0;
 }
 
 main .extendMargin {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
 }
 
 main .show {
@@ -346,7 +455,7 @@ main .show {
 }
 
 footer {
-  height: 10%;
+  height: var(--footer-height);
   background-color: #444242;
   color: white;
   display: -webkit-box;
@@ -360,5 +469,61 @@ footer {
           align-items: center;
   font-weight: lighter;
   font-size: 0.9rem;
+}
+
+@media (min-width: 550px) {
+  main .posts-container .postCard {
+    max-width: 500px;
+  }
+  main .createPost .showInp {
+    width: 500px;
+  }
+  main .posts-container .comments .commentContainer {
+    width: 75vw;
+    max-width: 75vw;
+  }
+  main .posts-container .post .commentImg {
+    left: 12%;
+  }
+  main .posts-container .post .thumbImgLeft {
+    left: 5%;
+  }
+}
+
+@media (min-width: 900px) {
+  main .posts-container .comments .commentContainer {
+    width: 45vw;
+    max-width: 45vw;
+  }
+}
+
+@media (min-width: 1400px) {
+  header nav .navigation {
+    padding-right: 2.5rem;
+  }
+  main .createPost .createPostText {
+    top: -70%;
+    left: 50%;
+  }
+  main .createPost .postBtn {
+    top: 120px;
+  }
+  main .createPost .sendPost {
+    left: 0;
+  }
+  main .createPost .closePost {
+    right: 0;
+  }
+  main .posts-container .postCard {
+    max-width: 500px;
+  }
+  main .posts-container .comments .commentContainer {
+    width: 25vw;
+    max-width: 25vw;
+  }
+  :root {
+    --header-height: 10%;
+    --footer-height: 8%;
+  }
 }
 /*# sourceMappingURL=index.css.map */
